@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superhero Smack Down</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen">
+
+    <div id="app-container" class="w-full max-w-4xl mx-auto p-4">
+
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active flex-col items-center justify-center text-center space-y-8">
+            <h1 class="font-bangers text-8xl text-yellow-400" style="text-shadow: 4px 4px 0 #000;">Who Dares to Challenge?</h1>
+            <input type="text" id="username-input" placeholder="Enter Your Name" class="text-black text-3xl text-center w-full max-w-md p-3 rounded-lg border-4 border-gray-400 focus:outline-none focus:border-blue-500">
+            <button id="login-btn" class="btn btn-green w-64">Login</button>
+        </div>
+
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen flex-col items-center justify-center text-center space-y-8">
+            <h1 class="font-bangers text-8xl text-yellow-400" style="text-shadow: 4px 4px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Superhero Smack Down</h1>
+            <p id="welcome-message" class="text-3xl text-gray-300">Welcome, Hero!</p>
+            <div class="space-y-4">
+                <button id="start-game-btn" class="btn btn-blue w-64">Start Game</button>
+                <button id="hero-collection-btn" class="btn btn-green w-64">Hero Collection</button>
+                <button id="logout-btn" class="btn btn-red w-64">Log Out</button>
+            </div>
+        </div>
+
+        <!-- Level Select Screen -->
+        <div id="level-select-screen" class="screen flex-col items-center justify-center space-y-6">
+            <h2 class="font-bangers text-7xl text-yellow-400" style="text-shadow: 3px 3px 0 #000;">Select a Level</h2>
+            <div id="level-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                <!-- Level cards will be injected here by JavaScript -->
+            </div>
+            <button id="back-to-home-from-levels" class="btn btn-red mt-6">Back to Home</button>
+        </div>
+
+        <!-- Pre-Game Screen -->
+        <div id="pre-game-screen" class="screen flex-col items-center justify-center text-center space-y-6">
+             <h2 id="pre-game-title" class="font-bangers text-6xl text-yellow-400" style="text-shadow: 3px 3px 0 #000;">Get Ready!</h2>
+             <img id="pre-game-boss-image" src="" alt="Boss" class="h-48 rounded-lg border-4 border-red-500" style="display: none;">
+             <div id="pre-game-level-info" class="text-3xl"></div>
+             <div id="countdown-display" class="font-bangers text-yellow-400 countdown-text" style="display: none;">3</div>
+             <button id="start-round-btn" class="btn btn-green w-64">Start Round</button>
+             <button id="back-to-levels-from-pre-game" class="btn btn-red mt-4">Choose Different Level</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen flex-col items-center justify-center space-y-4 p-6 rounded-lg bg-gray-800 shadow-2xl">
+            <div class="w-full flex justify-between items-center text-3xl font-bold">
+                <div id="timer" class="bg-blue-600 px-4 py-2 rounded-lg">Time: 60</div>
+                <div id="score" class="bg-green-600 px-4 py-2 rounded-lg">Score: 0</div>
+            </div>
+            <div id="progress-container" class="w-full mt-4">
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                <p id="goal-text" class="text-center text-sm mt-1 text-yellow-400">Goal: 15 Correct Answers</p>
+            </div>
+            <div id="boss-health-container" class="w-full mt-4" style="display: none;">
+                <div class="boss-health-container">
+                    <div id="boss-health-bar" class="boss-health-bar"></div>
+                </div>
+                <p class="text-center text-sm mt-1 text-red-400 font-bold">BOSS HEALTH</p>
+            </div>
+            <div class="comic-panel p-8 my-8 rounded-lg w-full text-center">
+                <p id="question" class="text-7xl font-bold text-gray-800">12 + 34</p>
+            </div>
+            <input type="number" id="answer-input" class="text-black text-4xl text-center w-full max-w-xs p-3 rounded-lg border-4 border-gray-400 focus:outline-none focus:border-blue-500" autofocus>
+             <button id="quit-game-btn" class="btn btn-red mt-4">Quit Game</button>
+        </div>
+
+        <!-- Hero Collection Screen -->
+        <div id="hero-collection-screen" class="screen flex-col items-center justify-center space-y-6">
+            <h2 class="font-bangers text-7xl text-yellow-400" style="text-shadow: 3px 3px 0 #000;">Hero Collection</h2>
+            <div id="collection-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full">
+                <!-- Hero cards will be injected here by JavaScript -->
+            </div>
+            <button id="back-to-home-from-collection" class="btn btn-red mt-6">Back to Home</button>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 items-center justify-center modal-bg" style="display: none;">
+        <div class="bg-white text-black p-8 rounded-lg shadow-2xl text-center max-w-md mx-auto">
+            <h3 id="modal-title" class="font-bangers text-5xl text-blue-600 mb-4">Round Complete!</h3>
+            <p id="modal-message" class="text-xl mb-6">You got 40 answers correct!</p>
+            <button id="modal-button" class="btn btn-blue">Continue</button>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
